@@ -1,0 +1,96 @@
+# Talos OS Debug tools 
+
+Image contains tools to debug node that include:
+
+- perf
+- bpftool
+- dnsutils
+- tcpdump
+- elfutils
+- gdb
+- gdbserver
+- strace
+- pciutils
+- kmod 
+- btop 
+- htop 
+- iftop 
+- nvme-cli 
+- ncdu
+- curl 
+- netcat-openbsd 
+- iproute2 
+- iputils-ping
+- iptables
+
+
+## Use it:
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: debug-tools
+  name: debug-tools
+  namespace: default
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: debug-tools
+  template:
+    metadata:
+      labels:
+        app: debug-tools
+    spec:
+      containers:
+      - args:
+        - "infinity"
+        command:
+        - /bin/sleep
+        image: ghcr.io/aarnaud/talos-debug-tools:master-6.1.69
+        imagePullPolicy: IfNotPresent
+        name: debug-container
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: true
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+          - name: hostfs
+            mountPath: /rootfs
+          - name: run-containerd
+            mountPath: /run/containerd
+          - name: var-log-pods
+            mountPath: /var/log/pods
+      dnsPolicy: ClusterFirstWithHostNet
+      hostIPC: true
+      hostPID: true
+      hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: false
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: hostfs
+          hostPath:
+            path: /
+        - name: run-containerd
+          hostPath:
+            path: /run/containerd
+        - name: var-log-pods
+          hostPath:
+            path: /var/log/pods
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+```
+
+Now you can exec in this containers
