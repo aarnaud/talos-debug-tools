@@ -15,11 +15,13 @@ RUN make -C tools/bpf install DESTDIR=/rootfs/
 
 FROM ubuntu:22.04
 ARG NERDCTL_VERSION="1.7.2"
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     locales bash-completion nano vim \
     libbinutils libnuma1 \
-    dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables
+    dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables \
+    fdisk gdisk xfsprogs e2fsprogs dosfstools zfsutils-linux efibootmgr
 RUN locale-gen "en_US.UTF-8"
+ENV LANG=en_US.UTF-8
 WORKDIR /usr/bin/
 RUN curl -s -L https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz \
     -o - | tar -xzf - nerdctl
