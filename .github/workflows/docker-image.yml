@@ -19,7 +19,7 @@ jobs:
   push:
     strategy:
       matrix:
-        kernel_version: [6.1.69, 6.1.67, 6.1.65, 6.1.64, 6.1.63]
+        kernel_version: [6.1.58, 6.1.61, 6.1.65, 6.1.69, 6.1.73, 6.1.74, 6.1.78]
     runs-on: ubuntu-latest
     permissions:
       packages: write

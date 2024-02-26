@@ -15,6 +15,8 @@ RUN make -C tools/bpf install DESTDIR=/rootfs/
 
 FROM ubuntu:22.04
 ARG NERDCTL_VERSION="1.7.2"
+RUN mkdir /var/run/sshd /root/.ssh
+EXPOSE 22
 RUN apt-get update && apt-get install --no-install-recommends -y \
     locales bash-completion nano vim file ca-certificates \
     libbinutils libnuma1 \
@@ -28,3 +30,4 @@ RUN curl -L https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_V
 COPY --from=builder /rootfs /
 RUN apt-get clean
 WORKDIR /root
+CMD [ "/usr/sbin/sshd", "-D" ]
