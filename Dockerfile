@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     locales bash-completion nano vim file ca-certificates \
     libbinutils libnuma1 \
     dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables \
-    fdisk gdisk xfsprogs e2fsprogs dosfstools zfsutils-linux efibootmgr xz-utils lm-sensors openssh-server rsync
+    fdisk gdisk xfsprogs e2fsprogs dosfstools zfsutils-linux efibootmgr xz-utils lm-sensors openssh-server rsync dmidecode
 RUN locale-gen "en_US.UTF-8"
 ENV LANG=en_US.UTF-8
 WORKDIR /usr/bin/
