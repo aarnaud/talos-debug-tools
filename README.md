@@ -94,3 +94,9 @@ spec:
 ```
 
 Now you can exec in this containers
+
+## Example to use zfs:
+
+```bash
+chroot /rootfs /usr/local/sbin/zpool status
+```
