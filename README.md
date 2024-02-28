@@ -2,27 +2,32 @@
 
 Image contains tools to debug node that include:
 
-- perf
 - bpftool
+- bpftrace
+- btop 
+- curl 
+- dmidecode
 - dnsutils
-- tcpdump
 - elfutils
 - gdb
 - gdbserver
-- strace
-- pciutils
-- kmod 
-- btop 
 - htop 
 - iftop 
-- nvme-cli 
-- ncdu
-- curl 
-- netcat-openbsd 
 - iproute2 
-- iputils-ping
 - iptables
-
+- iputils-ping
+- kmod 
+- lm-sensors
+- ncdu
+- netcat-openbsd 
+- nftables
+- numactl
+- nvme-cli 
+- pciutils
+- perf
+- rsync
+- strace
+- tcpdump
 
 ## Use it:
 
@@ -49,7 +54,7 @@ spec:
         - "infinity"
         command:
         - /bin/sleep
-        image: ghcr.io/aarnaud/talos-debug-tools:master-6.1.69
+        image: ghcr.io/aarnaud/talos-debug-tools:latest-6.1.78
         imagePullPolicy: IfNotPresent
         name: debug-container
         resources: {}
