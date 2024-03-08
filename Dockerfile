@@ -32,11 +32,11 @@ RUN curl -L https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_V
 COPY ./entrypoint.sh /
 COPY --from=builder /rootfs /
 WORKDIR /root
-RUN echo 'iscsiadm="chroot /host /usr/local/sbin/iscsiadm"' >> .bashrc
-RUN echo 'mdadm="chroot /host /usr/local/sbin/mdadm"' >> .bashrc
-RUN echo 'tgtadm="chroot /host /usr/local/sbin/tgtadm"' >> .bashrc
-RUN echo 'zdb="chroot /host /usr/local/sbin/zdb"' >> .bashrc
-RUN echo 'zfs="chroot /host /usr/local/sbin/zfs"' >> .bashrc
-RUN echo 'zpool="chroot /host /usr/local/sbin/zpool"' >> .bashrc
+RUN echo 'alias iscsiadm="chroot /host /usr/local/sbin/iscsiadm"' >> .bashrc
+RUN echo 'alias mdadm="chroot /host /usr/local/sbin/mdadm"' >> .bashrc
+RUN echo 'alias tgtadm="chroot /host /usr/local/sbin/tgtadm"' >> .bashrc
+RUN echo 'alias zdb="chroot /host /usr/local/sbin/zdb"' >> .bashrc
+RUN echo 'alias zfs="chroot /host /usr/local/sbin/zfs"' >> .bashrc
+RUN echo 'alias zpool="chroot /host /usr/local/sbin/zpool"' >> .bashrc
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/entrypoint.sh"]
