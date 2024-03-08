@@ -65,7 +65,7 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
           - name: hostfs
-            mountPath: /rootfs
+            mountPath: /host
           - name: run-containerd
             mountPath: /run/containerd
           - name: var-log-pods
