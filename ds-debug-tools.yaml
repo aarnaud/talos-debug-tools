@@ -25,7 +25,7 @@ spec:
         app: debug-tools
     spec:
       containers:
-      - image: ghcr.io/aarnaud/talos-debug-tools:latest-6.1.78
+      - image: ghcr.io/aarnaud/talos-debug-tools:latest-6.1.80
         imagePullPolicy: IfNotPresent
         name: debug-container
         resources: {}
@@ -37,6 +37,8 @@ spec:
         volumeMounts:
           - name: hostfs
             mountPath: /host
+          - name: device-dir
+            mountPath: /dev
           - name: run-containerd
             mountPath: /run/containerd
           - name: var-log-pods
@@ -59,6 +61,9 @@ spec:
         - name: hostfs
           hostPath:
             path: /
+        - name: device-dir
+          hostPath:
+            path: /dev
         - name: run-containerd
           hostPath:
             path: /run/containerd
