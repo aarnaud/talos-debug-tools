@@ -5,12 +5,15 @@ Image contains tools to debug node that include:
 - bpftool
 - bpftrace
 - btop 
-- curl 
+- curl
 - dmidecode
 - dnsutils
+- e2fsprogs
 - elfutils
+- fdisk
 - gdb
 - gdbserver
+- gdisk
 - htop 
 - iftop 
 - iproute2 
@@ -19,6 +22,7 @@ Image contains tools to debug node that include:
 - kmod 
 - lm-sensors
 - ncdu
+- nerdctl
 - netcat-openbsd 
 - nftables
 - numactl
@@ -26,8 +30,10 @@ Image contains tools to debug node that include:
 - pciutils
 - perf
 - rsync
+- sg3-utils
 - strace
 - tcpdump
+- xfsprogs
 
 ## Use it:
 
