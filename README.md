@@ -21,6 +21,7 @@ Image contains tools to debug node that include:
 - iputils-ping
 - kmod 
 - lm-sensors
+- lvm2
 - ncdu
 - nerdctl
 - netcat-openbsd 
