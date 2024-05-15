@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libslang2 libtraceevent1 \
     dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop \
     nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables nftables bpftrace \
-    sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools
+    sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools libhugetlbfs-bin
 RUN apt-get clean
 RUN locale-gen "en_US.UTF-8"
 ENV LANG=en_US.UTF-8
