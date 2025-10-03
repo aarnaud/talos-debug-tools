@@ -1,6 +1,9 @@
 name: Build and publish docker image
 
-on:   
+on:
+  schedule:
+    # Runs every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'    
   push:
     # Publish `master` as Docker `latest` image.
     branches:
@@ -19,7 +22,7 @@ jobs:
   push:
     strategy:
       matrix:
-        kernel_version: [6.1.73, 6.1.74, 6.1.78, 6.1.80, 6.1.100, 6.6.28, 6.6.29, 6.6.43, 6.6.52]
+        kernel_version: [6.1.100, 6.6.52, 6.6.64, 6.12.25, 6.12.43, 6.12.48]
     runs-on: ubuntu-latest
     permissions:
       packages: write
