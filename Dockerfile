@@ -1,11 +1,11 @@
-FROM debian:bookworm as builder
+FROM debian:trixie as builder
 RUN mkdir -p /src /rootfs/usr/bin /rootfs/usr/sbin /rootfs/usr/lib /rootfs/usr/lib32 /rootfs/usr/lib64 /rootfs/usr/libx32
 WORKDIR /rootfs
 RUN ln -s usr/bin bin && ln -s usr/sbin sbin && ln -s usr/lib lib && ln -s usr/lib32 lib32 && ln -s usr/lib64 lib64 && ln -s usr/libx32 libx32
 WORKDIR /src
 RUN apt-get update && apt-get -y install \
     xz-utils python3 python3-dev python3-setuptools make gcc clang pkg-config llvm binutils-dev libreadline-dev libelf-dev libnuma-dev libpci-dev libcap-dev gettext curl flex bison libssl-dev libslang2-dev libtraceevent-dev
-ARG KERNEL_VERSION="6.6.29"
+ARG KERNEL_VERSION="6.12.48"
 RUN curl -L https://cdn.kernel.org/pub/linux/kernel/v$(echo "$KERNEL_VERSION" | cut -d . -f 1).x/linux-$KERNEL_VERSION.tar.xz -o linux.tar.xz
 RUN tar -xf linux.tar.xz --strip-components=1
 RUN make -C tools/perf
@@ -13,8 +13,8 @@ RUN make -C tools/perf install DESTDIR=/rootfs/
 RUN make -C tools/bpf
 RUN make -C tools/bpf install DESTDIR=/rootfs/
 
-FROM debian:bookworm
-ARG NERDCTL_VERSION="1.7.4"
+FROM debian:trixie
+ARG NERDCTL_VERSION="2.1.6"
 RUN mkdir /var/run/sshd /root/.ssh
 EXPOSE 22
 RUN apt-get update && apt-get install --no-install-recommends -y \
