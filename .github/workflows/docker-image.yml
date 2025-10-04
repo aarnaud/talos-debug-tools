@@ -57,6 +57,7 @@ jobs:
           VERSION=$VERSION-${{ matrix.kernel_version }}
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker buildx build --file Dockerfile --build-arg KERNEL_VERSION=${{ matrix.kernel_version }} --label "runnumber=${GITHUB_RUN_ID}" --push \
+          [[ "${{ matrix.kernel_version }}" == "6.6."* ]] && KERNEL_CC="gcc-13" || KERNEL_CC="gcc"
+          docker buildx build --file Dockerfile --build-arg KERNEL_VERSION=${{ matrix.kernel_version }} --build-arg CC=${{ KERNEL_CC }} --label "runnumber=${GITHUB_RUN_ID}" --push \
           --tag $IMAGE_ID:$VERSION \
           --platform linux/amd64,linux/arm64 .
