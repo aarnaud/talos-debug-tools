@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     dumb-init locales bash-completion nano vim file ca-certificates \
     libbinutils libnuma1 numactl \
     libslang2 libtraceevent1 \
-    dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop \
+    dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop iperf3 \
     nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables nftables bpftrace \
     sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools libhugetlbfs-bin
 RUN apt-get clean
