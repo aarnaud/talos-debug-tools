@@ -3,7 +3,7 @@ name: Build and publish docker image
 on:
   schedule:
     # Runs every Monday at 08:00 UTC
-    - cron: '0 8 * * 1'    
+    - cron: '0 8 * * 1'
   push:
     # Publish `master` as Docker `latest` image.
     branches:
@@ -22,7 +22,8 @@ jobs:
   push:
     strategy:
       matrix:
-        kernel_version: [6.6.52, 6.6.64, 6.12.25, 6.12.43, 6.12.48]
+        # Talos version: v1.11.6, v1.12.12, v1.13.12, v1.14.5
+        kernel_version: [6.12.62, 6.18.49, 6.18.57, 6.18.58]
     runs-on: ubuntu-latest
     permissions:
       packages: write

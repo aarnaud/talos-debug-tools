@@ -16,15 +16,23 @@ RUN make -C tools/bpf install DESTDIR=/rootfs/
 
 FROM debian:trixie
 ARG NERDCTL_VERSION="2.1.6"
+ARG KUBECTL_VERSION="v1.37"
 RUN mkdir /var/run/sshd /root/.ssh
 EXPOSE 22
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl gnupg
+RUN install -d -m 0755 /etc/apt/keyrings \
+    && curl -fsSL https://pkgs.k8s.io/core:/stable:/${KUBECTL_VERSION}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${KUBECTL_VERSION}/deb/ /" > /etc/apt/sources.list.d/kubernetes.list \
+    && curl -fsSL https://pkg.sofka.rs/sofka.asc -o /etc/apt/keyrings/sofka.asc \
+    && echo "deb [signed-by=/etc/apt/keyrings/sofka.asc] https://pkg.sofka.rs/deb stable main" > /etc/apt/sources.list.d/sofka.list
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    dumb-init locales bash-completion nano vim file ca-certificates \
+    dumb-init locales bash-completion nano vim file \
     libbinutils libnuma1 numactl \
     libslang2 libtraceevent1 \
     dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop iperf3 \
-    nvme-cli ncdu curl netcat-openbsd iproute2 iputils-ping iptables nftables bpftrace \
-    sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools libhugetlbfs-bin
+    nvme-cli ncdu netcat-openbsd iproute2 iputils-ping iptables nftables bpftrace \
+    sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools libhugetlbfs-bin \
+    kubectl sofka
 RUN apt-get clean
 RUN locale-gen "en_US.UTF-8"
 ENV LANG=en_US.UTF-8
