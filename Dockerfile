@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     dnsutils tcpdump elfutils gdb gdbserver strace pciutils kmod btop htop iftop iperf3 \
     nvme-cli ncdu netcat-openbsd iproute2 iputils-ping iptables nftables bpftrace \
     sg3-utils fdisk gdisk xfsprogs e2fsprogs dosfstools efibootmgr xz-utils lvm2 lm-sensors openssh-server rsync dmidecode thunderbolt-tools libhugetlbfs-bin \
+    wireguard-tools \
     kubectl sofka
 RUN apt-get clean
 RUN locale-gen "en_US.UTF-8"
